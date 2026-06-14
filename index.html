@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>豌豆突围</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-kicker">ROGUELIKE RUNNER</span>
+        <strong>豌豆突围</strong>
+      </div>
+      <div class="top-stats">
+        <div><span>关卡</span><strong id="stageValue">1</strong></div>
+        <div><span>击败</span><strong id="killValue">0</strong></div>
+        <div><span>金币</span><strong id="coinValue">0</strong></div>
+      </div>
+    </header>
+
+    <section class="game-frame">
+      <canvas id="gameCanvas" aria-label="豌豆突围游戏画面"></canvas>
+
+      <div class="hud">
+        <div class="health-panel">
+          <div class="health-label">
+            <span>生命值</span>
+            <strong id="healthText">100 / 100</strong>
+          </div>
+          <div class="bar"><i id="healthBar"></i></div>
+        </div>
+        <div class="distance-panel">
+          <span>距离终点</span>
+          <strong id="distanceText">1000m</strong>
+        </div>
+      </div>
+
+      <div id="bossHud" class="boss-hud">
+        <div class="boss-name"><span>最终首领</span><strong>僵王博士</strong></div>
+        <div class="boss-bar"><i id="bossHealthBar"></i></div>
+        <b id="bossHealthText">10000 / 10000</b>
+      </div>
+
+      <div class="crosshair" aria-hidden="true"></div>
+
+      <section id="startScreen" class="overlay visible">
+        <div class="hero-card">
+          <div class="hero-icon">●</div>
+          <p class="eyebrow">准备好构筑你的火力了吗？</p>
+          <h1>一路射穿<br><em>僵尸狂潮</em></h1>
+          <p class="intro">左右移动躲避障碍，自动射击前方僵尸，穿过强化门打造本局专属 Build。</p>
+          <button id="startButton" class="primary-button">开始突围 <span>▶</span></button>
+          <div class="controls">
+            <span><kbd>A</kbd><kbd>D</kbd> 或 <kbd>←</kbd><kbd>→</kbd></span>
+            <span>鼠标 / 触屏拖动</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="choiceScreen" class="choice-overlay">
+        <div class="choice-heading">
+          <span>BUILD CHOICE</span>
+          <h2>选择你的强化</h2>
+          <p>只能带走一个，选得漂亮点。</p>
+        </div>
+        <div class="choice-list">
+          <button class="choice-card" data-choice="0"></button>
+          <button class="choice-card" data-choice="1"></button>
+        </div>
+      </section>
+
+      <section id="restScreen" class="rest-overlay">
+        <div class="rest-heading">
+          <span>REST STOP</span>
+          <h2>戴夫的补给站</h2>
+          <p>花费金币购买强化。离开后，僵尸生命值将提升 1.5 倍。</p>
+          <strong class="rest-wallet">金币 <b id="restCoinValue">0</b></strong>
+        </div>
+        <div id="shopList" class="shop-list">
+          <button class="shop-card" data-shop="0"></button>
+          <button class="shop-card" data-shop="1"></button>
+          <button class="shop-card" data-shop="2"></button>
+        </div>
+        <div class="rest-actions">
+          <button id="refreshShopButton" class="refresh-button">刷新道具 <span id="refreshCostValue">10</span> 金币</button>
+          <button id="leaveRestButton" class="primary-button rest-leave">继续出发 <span>▶</span></button>
+        </div>
+      </section>
+
+      <section id="endScreen" class="overlay">
+        <div class="result-card">
+          <p id="resultKicker" class="eyebrow">本次突围结束</p>
+          <h2 id="resultTitle">再来一次？</h2>
+          <div class="result-stats">
+            <div><span>前进距离</span><strong id="resultDistance">0m</strong></div>
+            <div><span>击败僵尸</span><strong id="resultKills">0</strong></div>
+            <div><span>最终伤害</span><strong id="resultDamage">10</strong></div>
+          </div>
+          <button id="restartButton" class="primary-button">重新开始 <span>↻</span></button>
+        </div>
+      </section>
+    </section>
+
+    <footer class="tips">
+      <span class="live-dot"></span>
+      自动射击已开启
+      <span class="separator"></span>
+      穿过发光门触发随机强化
+    </footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
