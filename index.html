@@ -14,9 +14,18 @@
         <strong>豌豆突围</strong>
       </div>
       <div class="top-stats">
-        <div><span>关卡</span><strong id="stageValue">1</strong></div>
-        <div><span>击败</span><strong id="killValue">0</strong></div>
-        <div><span>金币</span><strong id="coinValue">0</strong></div>
+        <div class="stat-card stat-stage">
+          <span class="stat-icon" aria-hidden="true"></span>
+          <span class="stat-copy"><span class="stat-label">关卡</span><strong id="stageValue">1</strong></span>
+        </div>
+        <div class="stat-card stat-kills">
+          <span class="stat-icon" aria-hidden="true"></span>
+          <span class="stat-copy"><span class="stat-label">击败</span><strong id="killValue">0</strong></span>
+        </div>
+        <div class="stat-card stat-coins">
+          <span class="stat-icon" aria-hidden="true"></span>
+          <span class="stat-copy"><span class="stat-label">金币</span><strong id="coinValue">0</strong></span>
+        </div>
       </div>
     </header>
 
@@ -43,7 +52,22 @@
         <b id="bossHealthText">10000 / 10000</b>
       </div>
 
-      <div class="crosshair" aria-hidden="true"></div>
+      <button id="pauseButton" class="pause-button" aria-label="暂停游戏" hidden>
+        <span class="pause-symbol" aria-hidden="true"></span>
+        <span class="pause-label">暂停键</span>
+      </button>
+
+      <section id="waveScreen" class="wave-screen">
+        <span id="waveKicker">WAVE 1</span>
+        <h2 id="waveTitle">第 1 波</h2>
+        <p id="waveSubtitle">僵尸来袭</p>
+      </section>
+
+      <section id="restArrivalScreen" class="rest-arrival-screen">
+        <span>REST AREA</span>
+        <h2>已抵达补给站</h2>
+        <p>前方安全，可以购买多件强化</p>
+      </section>
 
       <section id="startScreen" class="overlay visible">
         <div class="hero-card">
@@ -59,6 +83,28 @@
         </div>
       </section>
 
+      <section id="difficultyScreen" class="choice-overlay">
+        <div class="choice-heading">
+          <span>DIFFICULTY</span>
+          <h2>选择游戏难度</h2>
+          <p>不同难度会改变商店价格、路障、补给频率和最终 Boss。</p>
+        </div>
+        <div class="difficulty-select" aria-label="难度选择">
+          <button class="difficulty-option" data-difficulty="easy" type="button">
+            <strong>简单</strong>
+            <small>更强开局</small>
+          </button>
+          <button class="difficulty-option active" data-difficulty="normal" type="button">
+            <strong>普通</strong>
+            <small>当前体验</small>
+          </button>
+          <button class="difficulty-option" data-difficulty="hard" type="button">
+            <strong>困难</strong>
+            <small>高压挑战</small>
+          </button>
+        </div>
+      </section>
+
       <section id="choiceScreen" class="choice-overlay">
         <div class="choice-heading">
           <span>BUILD CHOICE</span>
@@ -71,21 +117,66 @@
         </div>
       </section>
 
+      <section id="talentScreen" class="choice-overlay">
+        <div class="choice-heading">
+          <span>START TALENT</span>
+          <h2>选择开局天赋</h2>
+          <p>三选一，决定本局的成长路线。</p>
+        </div>
+        <div class="choice-list talent-list">
+          <button class="choice-card talent-card" data-talent="0"></button>
+          <button class="choice-card talent-card" data-talent="1"></button>
+          <button class="choice-card talent-card" data-talent="2"></button>
+        </div>
+      </section>
+
       <section id="restScreen" class="rest-overlay">
         <div class="rest-heading">
-          <span>REST STOP</span>
-          <h2>戴夫的补给站</h2>
-          <p>花费金币购买强化。离开后，僵尸生命值将提升 1.5 倍。</p>
-          <strong class="rest-wallet">金币 <b id="restCoinValue">0</b></strong>
+          <span>SUPPLY SHOP · 可购买多件</span>
+          <h2>补给商店</h2>
+          <p>这里不是三选一：金币足够时可购买多件，也可以刷新商品。</p>
+          <strong class="rest-wallet">
+            <span class="rest-wallet-icon" aria-hidden="true"></span>
+            <span class="rest-wallet-label">当前金币</span>
+            <b id="restCoinValue">0</b>
+          </strong>
         </div>
+        <section class="active-talent-panel">
+          <div class="active-talent-title">
+            <span>当前天赋</span>
+            <b id="activeTalentCount">0</b>
+          </div>
+          <div id="activeTalentList" class="active-talent-list"></div>
+        </section>
         <div id="shopList" class="shop-list">
           <button class="shop-card" data-shop="0"></button>
           <button class="shop-card" data-shop="1"></button>
           <button class="shop-card" data-shop="2"></button>
+          <button class="shop-card" data-shop="3"></button>
         </div>
         <div class="rest-actions">
           <button id="refreshShopButton" class="refresh-button">刷新道具 <span id="refreshCostValue">10</span> 金币</button>
           <button id="leaveRestButton" class="primary-button rest-leave">继续出发 <span>▶</span></button>
+        </div>
+      </section>
+
+      <section id="pauseScreen" class="pause-overlay">
+        <div class="pause-card">
+          <div class="pause-heading">
+            <span>PAUSED</span>
+            <h2>游戏暂停</h2>
+          </div>
+          <div class="pause-actions">
+            <button id="resumeButton" class="primary-button">继续游戏 <span>▶</span></button>
+            <button id="pauseRestartButton" class="refresh-button">重新开始 <span>↻</span></button>
+          </div>
+          <section class="active-talent-panel pause-talent-panel">
+            <div class="active-talent-title">
+              <span>当前天赋</span>
+              <b id="pauseTalentCount">0</b>
+            </div>
+            <div id="pauseTalentList" class="active-talent-list"></div>
+          </section>
         </div>
       </section>
 
