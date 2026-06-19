@@ -53,6 +53,7 @@ button {
   grid-template-rows: auto 1fr auto;
   width: min(100vw, 1120px);
   height: 100vh;
+  height: 100dvh;
   margin: auto;
   padding: 18px 22px 14px;
 }
@@ -1320,6 +1321,279 @@ kbd {
   .boss-hud {
     top: 92px;
     width: min(430px, calc(100% - 80px));
+  }
+}
+
+@media (max-width: 640px) and (orientation: portrait) {
+  html,
+  body {
+    height: 100dvh;
+  }
+
+  .game-shell {
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100dvh;
+    padding: 8px;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 0 8px;
+  }
+
+  .brand {
+    align-items: center;
+    width: 100%;
+  }
+
+  .brand-kicker {
+    display: none;
+  }
+
+  .brand strong {
+    font-size: 19px;
+    letter-spacing: 0;
+  }
+
+  .top-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .top-stats .stat-card {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .game-frame {
+    min-height: 0;
+    border-width: 4px;
+    border-radius: 18px;
+  }
+
+  .hud {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    gap: 8px;
+  }
+
+  .health-panel {
+    width: min(168px, 48vw);
+  }
+
+  .distance-panel {
+    max-width: 118px;
+    text-align: right;
+  }
+
+  .pause-button {
+    top: 70px;
+    right: 8px;
+    width: 56px;
+    height: 48px;
+  }
+
+  .boss-hud {
+    top: 122px;
+    width: calc(100% - 28px);
+  }
+
+  .overlay,
+  .choice-overlay,
+  .rest-overlay,
+  .pause-overlay {
+    align-content: start;
+    overflow-y: auto;
+    padding: 14px;
+  }
+
+  .hero-card,
+  .result-card,
+  .pause-card {
+    align-self: center;
+  }
+
+  .choice-heading {
+    margin-bottom: 10px;
+  }
+
+  .choice-heading h2 {
+    font-size: 28px;
+    letter-spacing: 0;
+  }
+
+  .choice-heading p {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .difficulty-select {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: min(340px, 100%);
+  }
+
+  .difficulty-option {
+    min-height: 86px;
+    padding: 14px 10px;
+  }
+
+  .difficulty-option strong {
+    font-size: 22px;
+  }
+
+  .choice-list,
+  .talent-list {
+    grid-template-columns: 1fr;
+    width: min(340px, 100%);
+  }
+
+  .choice-card {
+    min-height: 128px;
+    padding: 14px 12px;
+    border-width: 4px;
+    border-radius: 16px;
+  }
+
+  .choice-card .choice-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 7px;
+    font-size: 20px;
+  }
+
+  .choice-card strong {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .choice-card small {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .rest-overlay {
+    padding-top: 18px;
+  }
+
+  .rest-heading h2 {
+    font-size: 28px;
+    letter-spacing: 0;
+  }
+
+  .rest-wallet {
+    margin-top: 4px;
+  }
+
+  .active-talent-panel {
+    max-height: 116px;
+  }
+
+  .shop-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(360px, 100%);
+  }
+
+  .shop-card {
+    min-height: 142px;
+    padding: 10px 6px;
+  }
+
+  .rest-actions {
+    position: sticky;
+    bottom: 0;
+    padding-bottom: 6px;
+    background: linear-gradient(transparent, rgba(32,39,21,.88) 28%);
+  }
+}
+
+@media (max-width: 390px) and (orientation: portrait) {
+  .game-shell {
+    padding: 6px;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .topbar {
+    padding-bottom: 6px;
+  }
+
+  .top-stats .stat-card {
+    grid-template-columns: 18px 1fr;
+    gap: 4px;
+    padding: 4px 5px;
+    border-width: 2px;
+    border-radius: 11px;
+  }
+
+  .top-stats .stat-icon {
+    width: 18px;
+    height: 18px;
+    border-width: 1px;
+    border-radius: 6px;
+  }
+
+  .top-stats .stat-label {
+    font-size: 8px;
+  }
+
+  .top-stats strong {
+    font-size: 13px;
+  }
+
+  .stat-stage .stat-icon::before {
+    width: 2px;
+    height: 12px;
+    transform: translateX(-4px);
+  }
+
+  .stat-stage .stat-icon::after {
+    left: 8px;
+    top: 4px;
+    width: 8px;
+    height: 6px;
+    box-shadow: 0 6px 0 #ecff6a;
+  }
+
+  .stat-kills .stat-icon::before {
+    width: 11px;
+    height: 11px;
+    border-width: 2px;
+  }
+
+  .stat-kills .stat-icon::after {
+    width: 3px;
+    height: 3px;
+    box-shadow:
+      0 -7px 0 -1px #4d321b,
+      0 7px 0 -1px #4d321b,
+      -7px 0 0 -1px #4d321b,
+      7px 0 0 -1px #4d321b;
+  }
+
+  .stat-coins .stat-icon::before {
+    font-size: 12px;
+  }
+
+  .health-panel {
+    width: 150px;
+  }
+
+  .distance-panel {
+    max-width: 104px;
+  }
+
+  .pause-button {
+    top: 62px;
+  }
+
+  .boss-hud {
+    top: 112px;
   }
 }
 
